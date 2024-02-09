@@ -1,0 +1,28 @@
+# Jest
+**/coverage
+
+# dotenv
+.env
+
+# production
+/build
+/out
+
+# npx create-next-app
+.DS_Store
+
+# npm
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# pnpm
+pnpm-lock.yaml
+.pnpm
+
+# Visual Studio Code
+.vscode/
+
+# Windows
+Thumbs.db
+ehthumbs.db
