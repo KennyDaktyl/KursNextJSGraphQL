@@ -3,6 +3,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./graphql/typeDefs.generated.js";
 import { resolvers } from "./graphql/resolvers.generated.js";
 
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,

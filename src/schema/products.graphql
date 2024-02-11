@@ -1,4 +1,5 @@
 extend type Query {
+  # products(): [Products!]!
   product(id: ID!): Product
 }
 
