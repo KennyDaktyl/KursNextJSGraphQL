@@ -31,18 +31,235 @@ export type Scalars = {
   Float: { input: number; output: number };
 };
 
-export type Product = {
-  __typename?: "Product";
+export type Cart = {
+  __typename?: "Cart";
+  id: Scalars["ID"]["output"];
+  items?: Maybe<Array<Maybe<CartItem>>>;
+};
+
+export type CartInput = {
+  items: Array<InputMaybe<CartItemInput>>;
+};
+
+export type CartItem = {
+  __typename?: "CartItem";
+  productId: Scalars["ID"]["output"];
+  quantity: Scalars["Int"]["output"];
+};
+
+export type CartItemInput = {
+  productId: Scalars["ID"]["input"];
+  quantity: Scalars["Int"]["input"];
+};
+
+export type Category = {
+  __typename?: "Category";
   description: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  products?: Maybe<Array<Maybe<Product>>>;
+  slug: Scalars["String"]["output"];
+};
+
+export type CategoryInput = {
+  description: Scalars["String"]["input"];
+  name: Scalars["String"]["input"];
+  slug: Scalars["String"]["input"];
+};
+
+export type Collection = {
+  __typename?: "Collection";
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  products?: Maybe<Array<Maybe<Product>>>;
+  slug: Scalars["String"]["output"];
+};
+
+export type CollectionInput = {
+  description: Scalars["String"]["input"];
+  name: Scalars["String"]["input"];
+  slug: Scalars["String"]["input"];
+};
+
+export type ImageInput = {
+  alt: Scalars["String"]["input"];
+  height: Scalars["Int"]["input"];
+  url: Scalars["String"]["input"];
+  width: Scalars["Int"]["input"];
+};
+
+export type Images = {
+  __typename?: "Images";
+  alt: Scalars["String"]["output"];
+  height: Scalars["Int"]["output"];
+  url: Scalars["String"]["output"];
+  width: Scalars["Int"]["output"];
+};
+
+export type Mutation = {
+  __typename?: "Mutation";
+  createCart: Cart;
+  createCategory: Category;
+  createCollection: Collection;
+  createOrder: Order;
+  createProduct: Product;
+  deleteCart: Cart;
+  deleteCategory: Category;
+  deleteCollection: Collection;
+  deleteOrder: Order;
+  deleteProduct: Product;
+  updateCart: Cart;
+  updateCategory: Category;
+  updateCollection: Collection;
+  updateOrder: Order;
+  updateProduct: Product;
+};
+
+export type MutationcreateCartArgs = {
+  input: CartInput;
+};
+
+export type MutationcreateCategoryArgs = {
+  input: CategoryInput;
+};
+
+export type MutationcreateCollectionArgs = {
+  input: CollectionInput;
+};
+
+export type MutationcreateOrderArgs = {
+  input: OrderInput;
+};
+
+export type MutationcreateProductArgs = {
+  input: ProductInput;
+};
+
+export type MutationdeleteCartArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationdeleteCategoryArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationdeleteCollectionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationdeleteOrderArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationdeleteProductArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationupdateCartArgs = {
+  id: Scalars["ID"]["input"];
+  input: CartInput;
+};
+
+export type MutationupdateCategoryArgs = {
+  id: Scalars["ID"]["input"];
+  input: CategoryInput;
+};
+
+export type MutationupdateCollectionArgs = {
+  id: Scalars["ID"]["input"];
+  input: CollectionInput;
+};
+
+export type MutationupdateOrderArgs = {
+  id: Scalars["ID"]["input"];
+  input: OrderInput;
+};
+
+export type MutationupdateProductArgs = {
+  id: Scalars["ID"]["input"];
+  input: ProductInput;
+};
+
+export type Order = {
+  __typename?: "Order";
+  cartId: Scalars["ID"]["output"];
+  createdAt: Scalars["String"]["output"];
+  email: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
+  items: Scalars["String"]["output"];
+  status: OrderStatus;
+  total: Scalars["Int"]["output"];
+  updatedAt: Scalars["String"]["output"];
+};
+
+export type OrderInput = {
+  cartId: Scalars["ID"]["input"];
+  createdAt: Scalars["String"]["input"];
+  email: Scalars["String"]["input"];
+  items: Scalars["String"]["input"];
+  status: OrderStatus;
+  total: Scalars["Int"]["input"];
+  updatedAt: Scalars["String"]["input"];
+};
+
+export type OrderStatus =
+  | "CANCELLED"
+  | "COMPLETED"
+  | "CREATED"
+  | "PAID"
+  | "PROCESSING";
+
+export type Product = {
+  __typename?: "Product";
+  categories?: Maybe<Array<Maybe<Category>>>;
+  collections?: Maybe<Array<Maybe<Collection>>>;
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
+  images?: Maybe<Array<Maybe<Images>>>;
   name: Scalars["String"]["output"];
   price: Scalars["Int"]["output"];
   slug: Scalars["String"]["output"];
 };
 
+export type ProductInput = {
+  categoryIds: Array<Scalars["ID"]["input"]>;
+  collectionIds: Array<Scalars["ID"]["input"]>;
+  description: Scalars["String"]["input"];
+  images: Array<ImageInput>;
+  name: Scalars["String"]["input"];
+  price: Scalars["Int"]["input"];
+  slug: Scalars["String"]["input"];
+};
+
 export type Query = {
   __typename?: "Query";
+  card?: Maybe<Cart>;
+  cards: Array<Cart>;
+  categories?: Maybe<Array<Maybe<Category>>>;
+  category?: Maybe<Category>;
+  collection?: Maybe<Collection>;
+  collections?: Maybe<Array<Maybe<Collection>>>;
+  order?: Maybe<Order>;
+  orders: Array<Order>;
   product?: Maybe<Product>;
+  products?: Maybe<Array<Maybe<Product>>>;
+};
+
+export type QuerycardArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type QuerycategoryArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type QuerycollectionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type QueryorderArgs = {
+  id: Scalars["ID"]["input"];
 };
 
 export type QueryproductArgs = {
@@ -156,22 +373,234 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Product: ResolverTypeWrapper<Product>;
-  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  Cart: ResolverTypeWrapper<Cart>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
+  CartInput: CartInput;
+  CartItem: ResolverTypeWrapper<CartItem>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  CartItemInput: CartItemInput;
+  Category: ResolverTypeWrapper<Category>;
+  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  CategoryInput: CategoryInput;
+  Collection: ResolverTypeWrapper<Collection>;
+  CollectionInput: CollectionInput;
+  ImageInput: ImageInput;
+  Images: ResolverTypeWrapper<Images>;
+  Mutation: ResolverTypeWrapper<{}>;
+  Order: ResolverTypeWrapper<Order>;
+  OrderInput: OrderInput;
+  OrderStatus: OrderStatus;
+  Product: ResolverTypeWrapper<Product>;
+  ProductInput: ProductInput;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Product: Product;
-  String: Scalars["String"]["output"];
+  Cart: Cart;
   ID: Scalars["ID"]["output"];
+  CartInput: CartInput;
+  CartItem: CartItem;
   Int: Scalars["Int"]["output"];
+  CartItemInput: CartItemInput;
+  Category: Category;
+  String: Scalars["String"]["output"];
+  CategoryInput: CategoryInput;
+  Collection: Collection;
+  CollectionInput: CollectionInput;
+  ImageInput: ImageInput;
+  Images: Images;
+  Mutation: {};
+  Order: Order;
+  OrderInput: OrderInput;
+  Product: Product;
+  ProductInput: ProductInput;
   Query: {};
   Boolean: Scalars["Boolean"]["output"];
+};
+
+export type CartResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Cart"] = ResolversParentTypes["Cart"],
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  items?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["CartItem"]>>>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartItemResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["CartItem"] = ResolversParentTypes["CartItem"],
+> = {
+  productId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CategoryResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Category"] = ResolversParentTypes["Category"],
+> = {
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType
+  >;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CollectionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Collection"] = ResolversParentTypes["Collection"],
+> = {
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType
+  >;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ImagesResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Images"] = ResolversParentTypes["Images"],
+> = {
+  alt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  height?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  width?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+> = {
+  createCart?: Resolver<
+    ResolversTypes["Cart"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateCartArgs, "input">
+  >;
+  createCategory?: Resolver<
+    ResolversTypes["Category"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateCategoryArgs, "input">
+  >;
+  createCollection?: Resolver<
+    ResolversTypes["Collection"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateCollectionArgs, "input">
+  >;
+  createOrder?: Resolver<
+    ResolversTypes["Order"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateOrderArgs, "input">
+  >;
+  createProduct?: Resolver<
+    ResolversTypes["Product"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateProductArgs, "input">
+  >;
+  deleteCart?: Resolver<
+    ResolversTypes["Cart"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationdeleteCartArgs, "id">
+  >;
+  deleteCategory?: Resolver<
+    ResolversTypes["Category"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationdeleteCategoryArgs, "id">
+  >;
+  deleteCollection?: Resolver<
+    ResolversTypes["Collection"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationdeleteCollectionArgs, "id">
+  >;
+  deleteOrder?: Resolver<
+    ResolversTypes["Order"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationdeleteOrderArgs, "id">
+  >;
+  deleteProduct?: Resolver<
+    ResolversTypes["Product"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationdeleteProductArgs, "id">
+  >;
+  updateCart?: Resolver<
+    ResolversTypes["Cart"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateCartArgs, "id" | "input">
+  >;
+  updateCategory?: Resolver<
+    ResolversTypes["Category"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateCategoryArgs, "id" | "input">
+  >;
+  updateCollection?: Resolver<
+    ResolversTypes["Collection"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateCollectionArgs, "id" | "input">
+  >;
+  updateOrder?: Resolver<
+    ResolversTypes["Order"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateOrderArgs, "id" | "input">
+  >;
+  updateProduct?: Resolver<
+    ResolversTypes["Product"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateProductArgs, "id" | "input">
+  >;
+};
+
+export type OrderResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Order"] = ResolversParentTypes["Order"],
+> = {
+  cartId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  items?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes["OrderStatus"], ParentType, ContextType>;
+  total?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ProductResolvers<
@@ -179,8 +608,23 @@ export type ProductResolvers<
   ParentType extends
     ResolversParentTypes["Product"] = ResolversParentTypes["Product"],
 > = {
+  categories?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Category"]>>>,
+    ParentType,
+    ContextType
+  >;
+  collections?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Collection"]>>>,
+    ParentType,
+    ContextType
+  >;
   description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  images?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Images"]>>>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   price?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -192,15 +636,63 @@ export type QueryResolvers<
   ParentType extends
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
+  card?: Resolver<
+    Maybe<ResolversTypes["Cart"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerycardArgs, "id">
+  >;
+  cards?: Resolver<Array<ResolversTypes["Cart"]>, ParentType, ContextType>;
+  categories?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Category"]>>>,
+    ParentType,
+    ContextType
+  >;
+  category?: Resolver<
+    Maybe<ResolversTypes["Category"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerycategoryArgs, "id">
+  >;
+  collection?: Resolver<
+    Maybe<ResolversTypes["Collection"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerycollectionArgs, "id">
+  >;
+  collections?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Collection"]>>>,
+    ParentType,
+    ContextType
+  >;
+  order?: Resolver<
+    Maybe<ResolversTypes["Order"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryorderArgs, "id">
+  >;
+  orders?: Resolver<Array<ResolversTypes["Order"]>, ParentType, ContextType>;
   product?: Resolver<
     Maybe<ResolversTypes["Product"]>,
     ParentType,
     ContextType,
     RequireFields<QueryproductArgs, "id">
   >;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType
+  >;
 };
 
 export type Resolvers<ContextType = any> = {
+  Cart?: CartResolvers<ContextType>;
+  CartItem?: CartItemResolvers<ContextType>;
+  Category?: CategoryResolvers<ContextType>;
+  Collection?: CollectionResolvers<ContextType>;
+  Images?: ImagesResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
+  Order?: OrderResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
