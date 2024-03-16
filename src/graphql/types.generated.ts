@@ -68,7 +68,6 @@ export type Category = {
 export type CategoryInput = {
   description: Scalars["String"]["input"];
   name: Scalars["String"]["input"];
-  slug: Scalars["String"]["input"];
 };
 
 export type Collection = {
@@ -83,22 +82,23 @@ export type Collection = {
 export type CollectionInput = {
   description: Scalars["String"]["input"];
   name: Scalars["String"]["input"];
-  slug: Scalars["String"]["input"];
+};
+
+export type Image = {
+  __typename?: "Image";
+  alt: Scalars["String"]["output"];
+  height: Scalars["Int"]["output"];
+  id: Scalars["String"]["output"];
+  url: Scalars["String"]["output"];
+  width: Scalars["Int"]["output"];
 };
 
 export type ImageInput = {
   alt: Scalars["String"]["input"];
   height: Scalars["Int"]["input"];
+  productId: Scalars["String"]["input"];
   url: Scalars["String"]["input"];
   width: Scalars["Int"]["input"];
-};
-
-export type Images = {
-  __typename?: "Images";
-  alt: Scalars["String"]["output"];
-  height: Scalars["Int"]["output"];
-  url: Scalars["String"]["output"];
-  width: Scalars["Int"]["output"];
 };
 
 export type Mutation = {
@@ -107,21 +107,21 @@ export type Mutation = {
   createCartItem: CartItem;
   createCategory: Category;
   createCollection: Collection;
-  createImage: Images;
+  createImage: CartItem;
   createOrder: Order;
   createProduct: Product;
   deleteCart: Cart;
   deleteCartItem: Cart;
   deleteCategory: Category;
   deleteCollection: Collection;
-  deleteImage: Images;
+  deleteImage: Cart;
   deleteOrder: Order;
   deleteProduct: Product;
   updateCart: Cart;
   updateCartItem: CartItem;
   updateCategory: Category;
   updateCollection: Collection;
-  updateImage: Images;
+  updateImage: CartItem;
   updateOrder: Order;
   updateProduct: Product;
 };
@@ -143,7 +143,7 @@ export type MutationcreateCollectionArgs = {
 };
 
 export type MutationcreateImageArgs = {
-  input: ImageInput;
+  input: CartItemInput;
 };
 
 export type MutationcreateOrderArgs = {
@@ -204,7 +204,7 @@ export type MutationupdateCollectionArgs = {
 
 export type MutationupdateImageArgs = {
   id: Scalars["ID"]["input"];
-  input: ImageInput;
+  input: CartItemInput;
 };
 
 export type MutationupdateOrderArgs = {
@@ -248,20 +248,19 @@ export type Product = {
   collections?: Maybe<Array<Maybe<Collection>>>;
   description: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
-  images?: Maybe<Array<Maybe<Images>>>;
+  images?: Maybe<Array<Maybe<Image>>>;
   name: Scalars["String"]["output"];
   price: Scalars["Int"]["output"];
   slug: Scalars["String"]["output"];
 };
 
 export type ProductInput = {
-  categoryIds: Array<Scalars["ID"]["input"]>;
-  collectionIds: Array<Scalars["ID"]["input"]>;
+  categoryIds?: InputMaybe<Array<InputMaybe<Scalars["ID"]["input"]>>>;
+  collectionIds?: InputMaybe<Array<InputMaybe<Scalars["ID"]["input"]>>>;
   description: Scalars["String"]["input"];
-  images: Array<ImageInput>;
+  imageIds?: InputMaybe<Array<InputMaybe<Scalars["ID"]["input"]>>>;
   name: Scalars["String"]["input"];
   price: Scalars["Int"]["input"];
-  slug: Scalars["String"]["input"];
 };
 
 export type Query = {
@@ -274,7 +273,8 @@ export type Query = {
   category?: Maybe<Category>;
   collection?: Maybe<Collection>;
   collections?: Maybe<Array<Maybe<Collection>>>;
-  images: Array<Images>;
+  image?: Maybe<CartItem>;
+  images: Array<CartItem>;
   order?: Maybe<Order>;
   orders: Array<Order>;
   product?: Maybe<Product>;
@@ -294,6 +294,10 @@ export type QuerycategoryArgs = {
 };
 
 export type QuerycollectionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type QueryimageArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -423,8 +427,8 @@ export type ResolversTypes = {
   CategoryInput: CategoryInput;
   Collection: ResolverTypeWrapper<Collection>;
   CollectionInput: CollectionInput;
+  Image: ResolverTypeWrapper<Image>;
   ImageInput: ImageInput;
-  Images: ResolverTypeWrapper<Images>;
   Mutation: ResolverTypeWrapper<{}>;
   Order: ResolverTypeWrapper<Order>;
   OrderInput: OrderInput;
@@ -448,8 +452,8 @@ export type ResolversParentTypes = {
   CategoryInput: CategoryInput;
   Collection: Collection;
   CollectionInput: CollectionInput;
+  Image: Image;
   ImageInput: ImageInput;
-  Images: Images;
   Mutation: {};
   Order: Order;
   OrderInput: OrderInput;
@@ -520,13 +524,14 @@ export type CollectionResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ImagesResolvers<
+export type ImageResolvers<
   ContextType = any,
   ParentType extends
-    ResolversParentTypes["Images"] = ResolversParentTypes["Images"],
+    ResolversParentTypes["Image"] = ResolversParentTypes["Image"],
 > = {
   alt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   height?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   url?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   width?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -562,7 +567,7 @@ export type MutationResolvers<
     RequireFields<MutationcreateCollectionArgs, "input">
   >;
   createImage?: Resolver<
-    ResolversTypes["Images"],
+    ResolversTypes["CartItem"],
     ParentType,
     ContextType,
     RequireFields<MutationcreateImageArgs, "input">
@@ -604,7 +609,7 @@ export type MutationResolvers<
     RequireFields<MutationdeleteCollectionArgs, "id">
   >;
   deleteImage?: Resolver<
-    ResolversTypes["Images"],
+    ResolversTypes["Cart"],
     ParentType,
     ContextType,
     RequireFields<MutationdeleteImageArgs, "id">
@@ -646,7 +651,7 @@ export type MutationResolvers<
     RequireFields<MutationupdateCollectionArgs, "id" | "input">
   >;
   updateImage?: Resolver<
-    ResolversTypes["Images"],
+    ResolversTypes["CartItem"],
     ParentType,
     ContextType,
     RequireFields<MutationupdateImageArgs, "id" | "input">
@@ -698,7 +703,7 @@ export type ProductResolvers<
   description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   images?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Images"]>>>,
+    Maybe<Array<Maybe<ResolversTypes["Image"]>>>,
     ParentType,
     ContextType
   >;
@@ -753,7 +758,13 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
-  images?: Resolver<Array<ResolversTypes["Images"]>, ParentType, ContextType>;
+  image?: Resolver<
+    Maybe<ResolversTypes["CartItem"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryimageArgs, "id">
+  >;
+  images?: Resolver<Array<ResolversTypes["CartItem"]>, ParentType, ContextType>;
   order?: Resolver<
     Maybe<ResolversTypes["Order"]>,
     ParentType,
@@ -779,7 +790,7 @@ export type Resolvers<ContextType = any> = {
   CartItem?: CartItemResolvers<ContextType>;
   Category?: CategoryResolvers<ContextType>;
   Collection?: CollectionResolvers<ContextType>;
-  Images?: ImagesResolvers<ContextType>;
+  Image?: ImageResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Order?: OrderResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;

@@ -11,7 +11,7 @@ type Product {
   categories: [Category]
   collections: [Collection]
   price: Int!
-  images: [Images]
+  images: [Image]
 }
 
 type Mutation {
@@ -22,10 +22,9 @@ type Mutation {
 
 input ProductInput {
   name: String!
-  slug: String!
   description: String!
   price: Int!
-  categoryIds: [ID!]!
-  collectionIds: [ID!]!
-  images: [ImageInput!]!
+  categoryIds: [ID]
+  collectionIds: [ID]
+  imageIds: [ID]
 }

@@ -1,14 +1,16 @@
-type Query {
-  images: [Images!]!
-}
-
 type Mutation {
-  createImage(input: ImageInput!): Images!
-  updateImage(id: ID!, input: ImageInput!): Images!
-  deleteImage(id: ID!): Images!
+  createImage(input: CartItemInput!): CartItem!
+  updateImage(id: ID!, input: CartItemInput!): CartItem!
+  deleteImage(id: ID!): Cart!
 }
 
-type Images {
+type Query {
+  image(id: ID!): CartItem
+  images: [CartItem!]!
+}
+
+type Image {
+  id: String!
   url: String!
   alt: String!
   width: Int!
@@ -20,4 +22,5 @@ input ImageInput {
   alt: String!
   width: Int!
   height: Int!
+  productId: String!
 }

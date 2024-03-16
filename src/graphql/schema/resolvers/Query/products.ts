@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { QueryResolvers } from "./../../../types.generated";
+import { type QueryResolvers } from "./../../../types.generated";
 
 export const products: NonNullable<QueryResolvers["products"]> = async (
   _parent,
@@ -9,11 +9,32 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
   try {
     const prisma = new PrismaClient();
 
-    const allProducts = await prisma.product.findMany();
+    const allProducts = await prisma.product.findMany({
+      include: {
+        categories: {
+          select: { category: true },
+        },
+        collections: {
+          select: { collection: true },
+        },
+        images: true,
+      },
+    });
 
     await prisma.$disconnect();
 
-    return allProducts;
+    console.log("All products:", allProducts);
+
+    const productsWithRelations = allProducts.map((product) => ({
+      ...product,
+      categories: product.categories.map((category) => category.category),
+      collections: product.collections.map(
+        (collection) => collection.collection,
+      ),
+      images: product.images.map((image) => image),
+    }));
+
+    return productsWithRelations;
   } catch (error) {
     console.error("Failed to fetch products:", error);
     throw new Error("Failed to fetch products");

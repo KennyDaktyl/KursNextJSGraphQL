@@ -4,7 +4,7 @@ import { Cart } from "./schema/resolvers/Cart";
 import { CartItem } from "./schema/resolvers/CartItem";
 import { Category } from "./schema/resolvers/Category";
 import { Collection } from "./schema/resolvers/Collection";
-import { Images } from "./schema/resolvers/Images";
+import { Image } from "./schema/resolvers/Image";
 import { createCart as Mutation_createCart } from "./schema/resolvers/Mutation/createCart";
 import { createCartItem as Mutation_createCartItem } from "./schema/resolvers/Mutation/createCartItem";
 import { createCategory as Mutation_createCategory } from "./schema/resolvers/Mutation/createCategory";
@@ -36,6 +36,7 @@ import { categories as Query_categories } from "./schema/resolvers/Query/categor
 import { category as Query_category } from "./schema/resolvers/Query/category";
 import { collection as Query_collection } from "./schema/resolvers/Query/collection";
 import { collections as Query_collections } from "./schema/resolvers/Query/collections";
+import { image as Query_image } from "./schema/resolvers/Query/image";
 import { images as Query_images } from "./schema/resolvers/Query/images";
 import { order as Query_order } from "./schema/resolvers/Query/order";
 import { orders as Query_orders } from "./schema/resolvers/Query/orders";
@@ -51,6 +52,7 @@ export const resolvers: Resolvers = {
     category: Query_category,
     collection: Query_collection,
     collections: Query_collections,
+    image: Query_image,
     images: Query_images,
     order: Query_order,
     orders: Query_orders,
@@ -85,7 +87,7 @@ export const resolvers: Resolvers = {
   CartItem: CartItem,
   Category: Category,
   Collection: Collection,
-  Images: Images,
+  Image: Image,
   Order: Order,
   Product: Product,
 };

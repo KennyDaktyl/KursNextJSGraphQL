@@ -1,5 +1,6 @@
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -17,18 +18,29 @@ model Product {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    images       Image[]
-    categories   CategoriesOnProducts[]
-    collections  CollectionsOnProducts[]
-    cartItem     CartItem[]
-    Category     Category?               @relation(fields: [categoryId], references: [id])
-    categoryId   String?
-    Collection   Collection?             @relation(fields: [collectionId], references: [id])
-    collectionId String?
+    images      Image[]
+    categories  CategoriesOnProducts[]
+    collections CollectionsOnProducts[]
+    cartItem    CartItem[]
+}
+
+model Category {
+    id          String                 @id @default(cuid())
+    name        String
+    slug        String
+    description String
+    products    CategoriesOnProducts[]
+}
+
+model Collection {
+    id          String                  @id @default(cuid())
+    name        String
+    slug        String
+    description String
+    products    CollectionsOnProducts[]
 }
 
 model CategoriesOnProducts {
-    id         String   @default(cuid())
     product    Product  @relation(fields: [productId], references: [id])
     productId  String
     category   Category @relation(fields: [categoryId], references: [id])
@@ -38,7 +50,6 @@ model CategoriesOnProducts {
 }
 
 model CollectionsOnProducts {
-    id           String     @default(cuid())
     product      Product    @relation(fields: [productId], references: [id])
     productId    String
     collection   Collection @relation(fields: [collectionId], references: [id])
@@ -55,24 +66,6 @@ model Image {
     height    Int
     product   Product? @relation(fields: [productId], references: [id])
     productId String?
-}
-
-model Category {
-    id                   String                 @id @default(cuid())
-    name                 String
-    slug                 String
-    description          String
-    products             Product[]
-    CategoriesOnProducts CategoriesOnProducts[]
-}
-
-model Collection {
-    id                    String                  @id @default(cuid())
-    name                  String
-    slug                  String
-    description           String
-    products              Product[]
-    CollectionsOnProducts CollectionsOnProducts[]
 }
 
 model Cart {
