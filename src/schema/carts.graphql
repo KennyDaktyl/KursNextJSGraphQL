@@ -1,0 +1,20 @@
+type Mutation {
+  createCart(input: CartInput!): Cart!
+  updateCart(id: ID!, input: CartInput!): Cart!
+  deleteCart(id: ID!): Cart!
+}
+
+type Query {
+  cart(id: ID!): Cart
+  carts: [Cart!]!
+}
+
+type Cart {
+  id: String!
+  items: [CartItem]
+  order: Order
+}
+
+input CartInput {
+  items: [CartItemInput]
+}

@@ -1,0 +1,23 @@
+type Query {
+  images: [Images!]!
+}
+
+type Mutation {
+  createImage(input: ImageInput!): Images!
+  updateImage(id: ID!, input: ImageInput!): Images!
+  deleteImage(id: ID!): Images!
+}
+
+type Images {
+  url: String!
+  alt: String!
+  width: Int!
+  height: Int!
+}
+
+input ImageInput {
+  url: String!
+  alt: String!
+  width: Int!
+  height: Int!
+}

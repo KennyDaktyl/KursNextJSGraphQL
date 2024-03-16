@@ -1,39 +1,6 @@
 extend type Query {
-  collection(id: ID!): Collection
-  collections: [Collection]
-}
-
-type Collection {
-  id: ID!
-  name: String!
-  slug: String!
-  description: String!
-  products: [Product]
-}
-
-extend type Query {
-  category(id: ID!): Category
-  categories: [Category]
-}
-
-type Category {
-  id: ID!
-  name: String!
-  slug: String!
-  description: String!
-  products: [Product]
-}
-
-extend type Query {
   product(id: ID!): Product
   products: [Product]
-}
-
-type Images {
-  url: String!
-  alt: String!
-  width: Int!
-  height: Int!
 }
 
 type Product {
@@ -48,31 +15,9 @@ type Product {
 }
 
 type Mutation {
-  createCollection(input: CollectionInput!): Collection!
-  updateCollection(id: ID!, input: CollectionInput!): Collection!
-  deleteCollection(id: ID!): Collection!
-
-  # Mutacje dla kategorii
-  createCategory(input: CategoryInput!): Category!
-  updateCategory(id: ID!, input: CategoryInput!): Category!
-  deleteCategory(id: ID!): Category!
-
-  # Mutacje dla produktów
   createProduct(input: ProductInput!): Product!
   updateProduct(id: ID!, input: ProductInput!): Product!
   deleteProduct(id: ID!): Product!
-}
-
-input CollectionInput {
-  name: String!
-  slug: String!
-  description: String!
-}
-
-input CategoryInput {
-  name: String!
-  slug: String!
-  description: String!
 }
 
 input ProductInput {
@@ -83,76 +28,4 @@ input ProductInput {
   categoryIds: [ID!]!
   collectionIds: [ID!]!
   images: [ImageInput!]!
-}
-
-input ImageInput {
-  url: String!
-  alt: String!
-  width: Int!
-  height: Int!
-}
-
-type Query {
-  order(id: ID!): Order
-  orders: [Order!]!
-  card(id: ID!): Cart
-  cards: [Cart!]!
-}
-
-enum OrderStatus {
-  CREATED
-  PROCESSING
-  PAID
-  COMPLETED
-  CANCELLED
-}
-
-type CartItem {
-  productId: ID!
-  quantity: Int!
-}
-
-type Cart {
-  id: ID!
-  items: [CartItem]
-}
-
-type Order {
-  id: ID!
-  email: String!
-  createdAt: String!
-  updatedAt: String!
-  total: Int!
-  cartId: ID!
-  status: OrderStatus!
-  items: String!
-}
-
-type Mutation {
-  createOrder(input: OrderInput!): Order!
-  updateOrder(id: ID!, input: OrderInput!): Order!
-  deleteOrder(id: ID!): Order!
-
-  createCart(input: CartInput!): Cart!
-  updateCart(id: ID!, input: CartInput!): Cart!
-  deleteCart(id: ID!): Cart!
-}
-
-input OrderInput {
-  email: String!
-  createdAt: String!
-  updatedAt: String!
-  total: Int!
-  cartId: ID!
-  status: OrderStatus!
-  items: String!
-}
-
-input CartInput {
-  items: [CartItemInput]!
-}
-
-input CartItemInput {
-  productId: ID!
-  quantity: Int!
 }

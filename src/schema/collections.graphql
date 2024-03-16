@@ -1,0 +1,24 @@
+extend type Query {
+  collection(id: ID!): Collection
+  collections: [Collection]
+}
+
+type Mutation {
+  createCollection(input: CollectionInput!): Collection!
+  updateCollection(id: ID!, input: CollectionInput!): Collection!
+  deleteCollection(id: ID!): Collection!
+}
+
+type Collection {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String!
+  products: [Product]
+}
+
+input CollectionInput {
+  name: String!
+  slug: String!
+  description: String!
+}

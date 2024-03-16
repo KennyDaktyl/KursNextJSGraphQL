@@ -1,0 +1,35 @@
+type Query {
+  order(id: ID!): Order
+  orders: [Order!]!
+}
+
+type Mutation {
+  createOrder(input: OrderInput!): Order!
+  updateOrder(id: ID!, input: OrderInput!): Order!
+  deleteOrder(id: ID!): Order!
+}
+
+enum OrderStatus {
+  CREATED
+  PROCESSING
+  PAID
+  COMPLETED
+  CANCELLED
+}
+
+type Order {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  email: String!
+  total: Int!
+  status: String!
+  items: String
+}
+
+input OrderInput {
+  email: String!
+  total: Int!
+  status: String!
+  cartId: String!
+}
