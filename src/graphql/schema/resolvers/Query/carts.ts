@@ -1,8 +1,13 @@
+import { PrismaClient } from "@prisma/client";
 import type { QueryResolvers } from "./../../../types.generated";
 export const carts: NonNullable<QueryResolvers["carts"]> = async (
 	_parent,
-	_arg,
+	_args,
 	_ctx,
 ) => {
-	/* Implement Query.carts resolver logic here */
+	const prisma = new PrismaClient();
+
+	const cartsGet = await prisma.cart.findMany();
+
+	return cartsGet;
 };

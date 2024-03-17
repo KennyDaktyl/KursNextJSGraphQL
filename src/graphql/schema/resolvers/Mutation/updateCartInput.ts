@@ -1,4 +1,4 @@
-import type { MutationResolvers } from "../../../types.generated";
+import type { MutationResolvers } from "./../../../types.generated";
 export const updateCartInput: NonNullable<
   MutationResolvers["updateCartInput"]
 > = async (_parent, _arg, _ctx) => {
