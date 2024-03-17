@@ -8,10 +8,15 @@ const config = {
     "src/graphql/": defineConfig({
       typesPluginsConfig: {
         optionalInfoArgument: true,
+        defaultMapper: "../types.js#Mapper<{T}>",
+        contextType: "../types.js#Context",
       },
       scalarsOverrides: {
         ID: {
           type: "string",
+        },
+        DateTime: {
+          type: "Date",
         },
       },
     }),

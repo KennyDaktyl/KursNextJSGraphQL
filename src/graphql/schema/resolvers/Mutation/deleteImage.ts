@@ -1,6 +1,6 @@
 import type { MutationResolvers } from "./../../../types.generated";
 export const deleteImage: NonNullable<
-  MutationResolvers["deleteImage"]
+	MutationResolvers["deleteImage"]
 > = async (_parent, _arg, _ctx) => {
-  /* Implement Mutation.deleteImage resolver logic here */
+	/* Implement Mutation.deleteImage resolver logic here */
 };

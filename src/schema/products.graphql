@@ -6,12 +6,12 @@ extend type Query {
 type Product {
   id: ID!
   name: String!
-  slug: String!
   description: String!
   categories: [Category]
   collections: [Collection]
   price: Int!
   images: [Image]
+  reviews: [Review]
 }
 
 type Mutation {

@@ -1,24 +1,24 @@
 import type { QueryResolvers } from "./../../../types.generated";
 import { PrismaClient } from "@prisma/client";
 export const cart: NonNullable<QueryResolvers["cart"]> = async (
-  _parent,
-  { id },
-  _ctx,
+	_parent,
+	{ id },
+	_ctx,
 ) => {
-  const prisma = new PrismaClient();
+	const prisma = new PrismaClient();
 
-  const cartGet = await prisma.cart.findUnique({
-    where: {
-      id: id,
-    },
-    include: {
-      items: {
-        include: {
-          product: true,
-        },
-      },
-    },
-  });
+	const cartGet = await prisma.cart.findUnique({
+		where: {
+			id: id,
+		},
+		include: {
+			items: {
+				include: {
+					product: true,
+				},
+			},
+		},
+	});
 
-  return cartGet;
+	return cartGet;
 };

@@ -19,6 +19,7 @@ model Product {
     updatedAt DateTime @updatedAt
 
     images      Image[]
+    reviews     Review[]
     categories  CategoriesOnProducts[]
     collections CollectionsOnProducts[]
     cartItem    CartItem[]
@@ -66,6 +67,17 @@ model Image {
     height    Int
     product   Product? @relation(fields: [productId], references: [id])
     productId String?
+}
+
+model Review {
+    id String @id @default(cuid())
+    title String
+    author String
+    content String
+    rating Int
+    createdAt DateTime @default(now())
+    product   Product @relation(fields: [productId], references: [id])
+    productId String
 }
 
 model Cart {

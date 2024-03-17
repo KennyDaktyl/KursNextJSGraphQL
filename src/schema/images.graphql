@@ -1,12 +1,12 @@
 type Mutation {
-  createImage(input: CartItemInput!): CartItem!
-  updateImage(id: ID!, input: CartItemInput!): CartItem!
-  deleteImage(id: ID!): Cart!
+  createImage(input: ImageInput!): Image!
+  updateImage(id: ID!, input: ImageInput!): Image!
+  deleteImage(id: ID!): Image!
 }
 
 type Query {
-  image(id: ID!): CartItem
-  images: [CartItem!]!
+  image(id: ID!): Image
+  images: [Image!]!
 }
 
 type Image {

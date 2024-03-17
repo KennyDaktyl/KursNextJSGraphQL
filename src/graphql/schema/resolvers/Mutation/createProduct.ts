@@ -1,70 +1,70 @@
-import { PrismaClient } from "@prisma/client";
 import slugify from "slugify";
 import type { MutationResolvers } from "./../../../types.generated";
-import { tr } from "@faker-js/faker";
 
 export const createProduct: NonNullable<
-  MutationResolvers["createProduct"]
+	MutationResolvers["createProduct"]
 > = async (_parent, { input }, _ctx) => {
-  try {
-    const prisma = new PrismaClient();
+	try {
+		const createdProduct = await _ctx.prisma.product.create({
+			data: {
+				name: input.name,
+				description: input.description,
+				price: input.price,
+				slug: slugify(input.name, { lower: true }),
+			},
+		});
 
-    // Pobieranie kategorii i kolekcji na podstawie przekazanych identyfikatorów
-    const categories = await prisma.category.findMany({
-      where: {
-        id: {
-          in: input.categoryIds,
-        },
-      },
-    });
+		const categoryIds = input.categoryIds?.filter((categoryId): categoryId is string => categoryId !== undefined) ?? [];
+		await _ctx.prisma.category.findMany({
+			where: {
+				id: {
+					in: categoryIds,
+				},
+			},
+		});
 
-    const collections = await prisma.collection.findMany({
-      where: {
-        id: {
-          in: input.collectionIds,
-        },
-      },
-    });
+		await Promise.all(
+			input.categoryIds?.map(async (categoryId) => {
+				if (categoryId !== null && categoryId !== undefined) {
+					try {
+						const createdCategoriesOnProduct = await _ctx.prisma.categoriesOnProducts.create({
+							data: {
+								productId: createdProduct.id, 
+								categoryId: categoryId,
+							},
+						});
+						return createdCategoriesOnProduct;
+					} catch (error) {
+						console.error(`Failed to create CategoriesOnProducts for category ${categoryId}:`, error);
+						throw new Error(`Failed to create CategoriesOnProducts for category ${categoryId}.`);
+					}
+				}
+			}) ?? []
+		);
 
-    console.log(categories[0].id);
+		await Promise.all(
+			input.collectionIds?.map(async (collectionId) => {
+				if (collectionId !== null && collectionId !== undefined) {
+					try {
+						const createdCollectionsOnProduct = await _ctx.prisma.collectionsOnProducts.create({
+							data: {
+								productId: createdProduct.id,
+								collectionId: collectionId,
+							},
+						});
+						return createdCollectionsOnProduct;
+					} catch (error) {
+						console.error(`Failed to create CollectionsOnProducts for collection ${collectionId}:`, error);
+						throw new Error(`Failed to create CollectionsOnProducts for collection ${collectionId}.`);
+					}
+				}
+			}) ?? []
+		);
 
-    // Tworzenie produktu
-    const createdProduct = await prisma.product.create({
-      data: {
-        name: input.name,
-        description: input.description,
-        price: input.price,
-        slug: slugify(input.name, { lower: true }),
-      },
-    });
-
-    const categoriesOnProducts = await Promise.all(
-      categories.map(async category => {
-        return await prisma.categoriesOnProducts.create({
-          data: {
-            product: { connect: { id: createdProduct.id } },
-            category: { connect: { id: category.id } },
-          },
-        });
-      })
-    );
-
-    const collectionsOnProducts = await Promise.all(
-      collections.map(async collection => {
-        await prisma.collectionsOnProducts.create({
-          data: {
-            product: { connect: { id: createdProduct.id } },
-            collection: { connect: { id: collection.id } },
-          },
-        });
-      })
-    );
-
-    await prisma.$disconnect();
-
-    return createdProduct;
-  } catch (error) {
-    console.error("Failed to create product:", error);
-    throw new Error(`Failed to create product.`);
-  }
+		await _ctx.prisma.$disconnect();
+		return createdProduct;
+	} catch (error) {
+		console.error("Failed to create product:", error);
+		throw new Error(`Failed to create product.`);
+	}
 };

@@ -1,0 +1,27 @@
+type Mutation {
+  createReview(input: ReviewInput!): Review!
+  updateReview(id: ID!, input: ReviewInput!): Review!
+  deleteReview(id: ID!): Review!
+}
+
+type Query {
+  review(id: ID!): Review
+  reviews: [Review!]!
+}
+
+type Review {
+  id: ID!
+  title: String!
+  author: String!
+  content: String!
+  rating: Int!
+  createdAt: DateTime!
+}
+
+input ReviewInput {
+  title: String!
+  author: String!
+  content: String!
+  rating: Int!
+  productId: ID!
+}
