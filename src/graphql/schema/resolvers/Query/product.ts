@@ -35,7 +35,6 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 				(collectionOnProduct) => collectionOnProduct.collection,
 			) ?? [];
 
-		// Zwracanie produktu z listą kategorii
 		foundProduct.categories = categories;
 		foundProduct.collections = collections;
 		console.log(foundProduct);

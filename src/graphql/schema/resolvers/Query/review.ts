@@ -4,5 +4,7 @@ export const review: NonNullable<QueryResolvers["review"]> = async (
 	_arg,
 	_ctx,
 ) => {
-	/* Implement Query.review resolver logic here */
+	return _ctx.prisma.review.findUnique({
+		where: {	id: _arg.id },
+	});
 };

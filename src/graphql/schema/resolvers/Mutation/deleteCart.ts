@@ -4,5 +4,5 @@ export const deleteCart: NonNullable<MutationResolvers["deleteCart"]> = async (
 	_arg,
 	_ctx,
 ) => {
-	/* Implement Mutation.deleteCart resolver logic here */
+	return _ctx.prisma.cart.delete({ where: { id: _arg.id } });
 };

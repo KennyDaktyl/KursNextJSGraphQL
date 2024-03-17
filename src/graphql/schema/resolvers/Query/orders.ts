@@ -4,5 +4,5 @@ export const orders: NonNullable<QueryResolvers["orders"]> = async (
 	_arg,
 	_ctx,
 ) => {
-	/* Implement Query.orders resolver logic here */
+	return _ctx.prisma.order.findMany();
 };

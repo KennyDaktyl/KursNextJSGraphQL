@@ -4,5 +4,7 @@ export const card: NonNullable<QueryResolvers["card"]> = async (
   _arg,
   _ctx,
 ) => {
-  /* Implement Query.card resolver logic here */
+  return _ctx.prisma.card.findUnique({
+    where: { id: _arg.id },
+  });
 };

@@ -12,7 +12,7 @@ export const Category: CategoryResolvers = {
 				},
 			})
 			.then((categoriesOnProducts) =>
-				categoriesOnProducts.map((cop) => cop.product)
+				categoriesOnProducts.map((cop) => cop.product),
 			);
 		return products ?? [];
 	},

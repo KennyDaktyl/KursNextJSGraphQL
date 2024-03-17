@@ -4,5 +4,5 @@ export const reviews: NonNullable<QueryResolvers["reviews"]> = async (
 	_arg,
 	_ctx,
 ) => {
-	/* Implement Query.reviews resolver logic here */
+	return _ctx.prisma.review.findMany();
 };

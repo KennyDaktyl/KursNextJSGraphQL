@@ -33,12 +33,12 @@ export const Product: ProductResolvers = {
 				},
 			})
 			.then((categoriesOnProducts) =>
-				categoriesOnProducts.map((cop) => cop.category)
+				categoriesOnProducts.map((cop) => cop.category),
 			);
 		return categories ?? [];
 	},
 
-	async collections(parent, _args, ctx) { 
+	async collections(parent, _args, ctx) {
 		const collections = await ctx.prisma.collectionsOnProducts
 			.findMany({
 				where: {
@@ -49,8 +49,8 @@ export const Product: ProductResolvers = {
 				},
 			})
 			.then((collectionsOnProducts) =>
-				collectionsOnProducts.map((cop) => cop.collection)
+				collectionsOnProducts.map((cop) => cop.collection),
 			);
 		return collections ?? [];
-	}
+	},
 };

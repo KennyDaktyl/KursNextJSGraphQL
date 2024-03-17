@@ -14,7 +14,10 @@ export const createProduct: NonNullable<
 			},
 		});
 
-		const categoryIds = input.categoryIds?.filter((categoryId): categoryId is string => categoryId !== undefined) ?? [];
+		const categoryIds =
+			input.categoryIds?.filter(
+				(categoryId): categoryId is string => categoryId !== undefined,
+			) ?? [];
 		await _ctx.prisma.category.findMany({
 			where: {
 				id: {
@@ -27,38 +30,50 @@ export const createProduct: NonNullable<
 			input.categoryIds?.map(async (categoryId) => {
 				if (categoryId !== null && categoryId !== undefined) {
 					try {
-						const createdCategoriesOnProduct = await _ctx.prisma.categoriesOnProducts.create({
-							data: {
-								productId: createdProduct.id, 
-								categoryId: categoryId,
-							},
-						});
+						const createdCategoriesOnProduct =
+							await _ctx.prisma.categoriesOnProducts.create({
+								data: {
+									productId: createdProduct.id,
+									categoryId: categoryId,
+								},
+							});
 						return createdCategoriesOnProduct;
 					} catch (error) {
-						console.error(`Failed to create CategoriesOnProducts for category ${categoryId}:`, error);
-						throw new Error(`Failed to create CategoriesOnProducts for category ${categoryId}.`);
+						console.error(
+							`Failed to create CategoriesOnProducts for category ${categoryId}:`,
+							error,
+						);
+						throw new Error(
+							`Failed to create CategoriesOnProducts for category ${categoryId}.`,
+						);
 					}
 				}
-			}) ?? []
+			}) ?? [],
 		);
 
 		await Promise.all(
 			input.collectionIds?.map(async (collectionId) => {
 				if (collectionId !== null && collectionId !== undefined) {
 					try {
-						const createdCollectionsOnProduct = await _ctx.prisma.collectionsOnProducts.create({
-							data: {
-								productId: createdProduct.id,
-								collectionId: collectionId,
-							},
-						});
+						const createdCollectionsOnProduct =
+							await _ctx.prisma.collectionsOnProducts.create({
+								data: {
+									productId: createdProduct.id,
+									collectionId: collectionId,
+								},
+							});
 						return createdCollectionsOnProduct;
 					} catch (error) {
-						console.error(`Failed to create CollectionsOnProducts for collection ${collectionId}:`, error);
-						throw new Error(`Failed to create CollectionsOnProducts for collection ${collectionId}.`);
+						console.error(
+							`Failed to create CollectionsOnProducts for collection ${collectionId}:`,
+							error,
+						);
+						throw new Error(
+							`Failed to create CollectionsOnProducts for collection ${collectionId}.`,
+						);
 					}
 				}
-			}) ?? []
+			}) ?? [],
 		);
 
 		await _ctx.prisma.$disconnect();

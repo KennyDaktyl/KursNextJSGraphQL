@@ -1,7 +1,7 @@
 import type { CollectionResolvers } from "./../../types.generated";
 
 export const Collection: CollectionResolvers = {
-	async products(parent, _args, ctx) { 
+	async products(parent, _args, ctx) {
 		const products = await ctx.prisma.collectionsOnProducts
 			.findMany({
 				where: {
@@ -12,8 +12,8 @@ export const Collection: CollectionResolvers = {
 				},
 			})
 			.then((collectionsOnProducts) =>
-				collectionsOnProducts.map((cop) => cop.product)
+				collectionsOnProducts.map((cop) => cop.product),
 			);
 		return products ?? [];
-	}
+	},
 };
