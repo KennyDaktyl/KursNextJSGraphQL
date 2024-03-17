@@ -8,7 +8,7 @@
     "dev": "tsx watch src/api/server.ts",
     "seed": "tsx prisma/seed.ts",
     "migrate": "tsx prisma/migrate.ts",
-    "build": "tsx build"
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",

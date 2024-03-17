@@ -3,7 +3,8 @@ import {
 	GraphQLScalarType,
 	GraphQLScalarTypeConfig,
 } from "graphql";
-import { Context, Mapper } from "../types.js";
+import { Context, Mapper } from "../types";
+// import { Context, Mapper } from "../types.js";
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = {

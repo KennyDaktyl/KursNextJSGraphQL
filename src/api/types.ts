@@ -1,4 +1,4 @@
-import { OptionalKeys } from '@prisma/client/runtime/library';
+// import { OptionalKeys } from '@prisma/client/runtime/library';
 
 type optionalKeys<T> = {
     [K in keyof T]-?: T[K] extends
@@ -8,13 +8,13 @@ type optionalKeys<T> = {
     : never;
 }[keyof T];
 
-type MakeNestedRelationshipsOptional<T extends object> = {
-    [K in keyof Pick<T, OptionalKeys<T>>]?: MakeNestedRelationshipsOptional<
-        T[K]
-    >;
-} & {
-    [K in keyof Omit<T, OptionalKeys<T>>]: T[K];
-}
+// type MakeNestedRelationshipsOptional<T extends object> = {
+//     [K in keyof Pick<T, OptionalKeys<T>>]?: MakeNestedRelationshipsOptional<
+//         T[K]
+//     >;
+// } & {
+//     [K in keyof Omit<T, OptionalKeys<T>>]: T[K];
+// }
 
 export type Mapper<T> = T;
 
