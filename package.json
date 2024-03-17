@@ -5,7 +5,7 @@
   "scripts": {
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "postinstall": "pnpm codegen",
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/api/server.ts",
     "seed": "tsx prisma/seed.ts"
   },
   "keywords": [],

@@ -3,9 +3,9 @@ import { defineConfig } from "@eddeee888/gcg-typescript-resolver-files";
 
 const config = {
   overwrite: true,
-  schema: "./src/schema/**/*.graphql",
+  schema: "./src/api/schema/**/*.graphql",
   generates: {
-    "src/graphql/": defineConfig({
+    "src/api/graphql/": defineConfig({
       typesPluginsConfig: {
         optionalInfoArgument: true,
         defaultMapper: "../types.js#Mapper<{T}>",
