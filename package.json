@@ -6,7 +6,9 @@
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "postinstall": "pnpm codegen",
     "dev": "tsx watch src/api/server.ts",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "migrate": "tsx prisma/migrate.ts",
+    "build": "tsx build"
   },
   "keywords": [],
   "author": "",
