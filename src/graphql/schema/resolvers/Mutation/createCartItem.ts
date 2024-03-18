@@ -7,11 +7,14 @@ export const createCartItem: NonNullable<
 	 _arg,
 	 _ctx: any
 	) => {
-	const createdImage = await _ctx.prisma.cartItem.create({
+	const createdCartItem = await _ctx.prisma.cartItem.create({
 		data: {
 			..._arg.input,
 		},
+		include: {
+			product: true,
+		},
 	});
 
-	return createdImage;
+	return createdCartItem;
 };
