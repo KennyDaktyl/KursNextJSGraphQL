@@ -9,6 +9,9 @@ export const cartitem: NonNullable<QueryResolvers["cartitem"]> = async (
 		where: {
 			id: _args.id,
 		},
+		include: {
+			product: true,
+		},
 	});
 
 	return cartItemGet;
