@@ -1,8 +1,8 @@
 import type { QueryResolvers } from "./../../../types.generated";
 export const reviews: NonNullable<QueryResolvers["reviews"]> = async (
-	_parent,
-	_arg,
-	_ctx,
+	_parent: any,
+	_arg: any,
+	_ctx: any,
 ) => {
 	return _ctx.prisma.review.findMany();
 };

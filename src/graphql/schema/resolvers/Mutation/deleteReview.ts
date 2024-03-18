@@ -1,4 +1,5 @@
-import type { MutationResolvers } from "./../../../types.generated";
+import { MutationResolvers } from "../../../types.generated";
+
 export const deleteReview: NonNullable<
 	MutationResolvers["deleteReview"]
 > = async (_parent, _arg, _ctx) => {
