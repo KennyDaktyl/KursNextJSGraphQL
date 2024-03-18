@@ -517,8 +517,7 @@ export type ResolversParentTypes = {
 
 export type CartResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Cart"] = ResolversParentTypes["Cart"],
+	ParentType extends ResolversParentTypes["Cart"] = ResolversParentTypes["Cart"],
 > = {
 	id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	items?: Resolver<
@@ -532,8 +531,7 @@ export type CartResolvers<
 
 export type CartItemResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["CartItem"] = ResolversParentTypes["CartItem"],
+	ParentType extends ResolversParentTypes["CartItem"] = ResolversParentTypes["CartItem"],
 > = {
 	cart?: Resolver<Maybe<ResolversTypes["Cart"]>, ParentType, ContextType>;
 	id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -544,8 +542,7 @@ export type CartItemResolvers<
 
 export type CategoryResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Category"] = ResolversParentTypes["Category"],
+	ParentType extends ResolversParentTypes["Category"] = ResolversParentTypes["Category"],
 > = {
 	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
@@ -561,8 +558,7 @@ export type CategoryResolvers<
 
 export type CollectionResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Collection"] = ResolversParentTypes["Collection"],
+	ParentType extends ResolversParentTypes["Collection"] = ResolversParentTypes["Collection"],
 > = {
 	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
@@ -583,8 +579,7 @@ export interface DateTimeScalarConfig
 
 export type ImageResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Image"] = ResolversParentTypes["Image"],
+	ParentType extends ResolversParentTypes["Image"] = ResolversParentTypes["Image"],
 > = {
 	alt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	height?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
@@ -596,8 +591,7 @@ export type ImageResolvers<
 
 export type MutationResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+	ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
 > = {
 	createCart?: Resolver<
 		ResolversTypes["Cart"],
@@ -747,8 +741,7 @@ export type MutationResolvers<
 
 export type OrderResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Order"] = ResolversParentTypes["Order"],
+	ParentType extends ResolversParentTypes["Order"] = ResolversParentTypes["Order"],
 > = {
 	createdAt?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -762,8 +755,7 @@ export type OrderResolvers<
 
 export type ProductResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Product"] = ResolversParentTypes["Product"],
+	ParentType extends ResolversParentTypes["Product"] = ResolversParentTypes["Product"],
 > = {
 	categories?: Resolver<
 		Maybe<Array<Maybe<ResolversTypes["Category"]>>>,
@@ -794,8 +786,7 @@ export type ProductResolvers<
 
 export type QueryResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
+	ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
 	cart?: Resolver<
 		Maybe<ResolversTypes["Cart"]>,
@@ -873,8 +864,7 @@ export type QueryResolvers<
 
 export type ReviewResolvers<
 	ContextType = Context,
-	ParentType extends
-		ResolversParentTypes["Review"] = ResolversParentTypes["Review"],
+	ParentType extends ResolversParentTypes["Review"] = ResolversParentTypes["Review"],
 > = {
 	author?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	content?: Resolver<ResolversTypes["String"], ParentType, ContextType>;

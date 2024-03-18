@@ -1,20 +1,43 @@
+// {
+// 	"$schema": "https://json.schemastore.org/tsconfig",
+// 	"compilerOptions": {
+// 		"target": "es2022",
+// 		"lib": ["es2022"],
+// 		"allowJs": true,
+// 		"skipLibCheck": true,
+// 		"strict": true,
+// 		"forceConsistentCasingInFileNames": true,
+// 		"noEmit": true,
+// 		"esModuleInterop": true,
+// 		"module": "ESNext",
+// 		"moduleResolution": "node",
+// 		"resolveJsonModule": true,
+// 		"isolatedModules": true,
+// 		"jsx": "preserve",
+// 		"incremental": true
+// 	},
+// 	"exclude": ["node_modules"]
+// }
+
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		"target": "es2022",
-		"lib": ["es2022"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-        "esModuleInterop": true,
-        "module": "ESNext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true
+	  "outDir": "./dist",
+	  "strict": true,
+	  "sourceMap": true,
+	  "target": "es2017",
+	  "moduleResolution": "node",
+	  "module": "commonjs",
+	  "rootDir": "src",
+	  "lib": [
+		"ES2022",
+	  ],
+	  "skipLibCheck": true,
+	  "esModuleInterop": true
 	},
-	"exclude": ["node_modules"]
-}
+	"include": [
+	  "src/**/*.ts"
+	],
+	"exclude": [
+	  "node_modules"
+	]
+  }
