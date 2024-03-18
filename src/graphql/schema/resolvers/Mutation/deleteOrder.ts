@@ -1,6 +1,6 @@
 import type { MutationResolvers } from "./../../../types.generated";
 export const deleteOrder: NonNullable<
 	MutationResolvers["deleteOrder"]
-> = async (_parent, _arg, _ctx) => {
-	/* Implement Mutation.deleteOrder resolver logic here */
+> = async (_parent: any, _arg: { id: string }, _ctx: any) => {
+	return _ctx.prisma.order.delete({ where: { id: _arg.id } });
 };

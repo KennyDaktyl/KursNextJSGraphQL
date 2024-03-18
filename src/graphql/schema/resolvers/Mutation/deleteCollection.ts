@@ -2,5 +2,5 @@ import type { MutationResolvers } from "./../../../types.generated";
 export const deleteCollection: NonNullable<
 	MutationResolvers["deleteCollection"]
 > = async (_parent, _arg, _ctx) => {
-	/* Implement Mutation.deleteCollection resolver logic here */
+	return _ctx.prisma.collection.delete({ where: { id: _arg.id } });
 };

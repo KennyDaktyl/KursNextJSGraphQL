@@ -6,7 +6,6 @@ export const product: NonNullable<QueryResolvers["product"]> = async (
 	_ctx,
 ) => {
 	try {
-
 		const foundProduct = await _ctx.prisma.product.findUnique({
 			where: { id },
 		});

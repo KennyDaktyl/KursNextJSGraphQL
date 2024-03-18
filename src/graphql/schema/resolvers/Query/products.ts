@@ -5,13 +5,12 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
 	_arg,
 	_ctx,
 ) => {
-		
 	const products = await _ctx.prisma.product.findMany();
 	return products.map((product) => ({
-			...product,
-			categories: [],
-			collections: [],
-			reviews: [],
-			images: [],
+		...product,
+		categories: [],
+		collections: [],
+		reviews: [],
+		images: [],
 	}));
 };

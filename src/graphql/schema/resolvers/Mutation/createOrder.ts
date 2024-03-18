@@ -1,32 +1,11 @@
 import type { MutationResolvers } from "./../../../types.generated";
+
 export const createOrder: NonNullable<
 	MutationResolvers["createOrder"]
-> = async (_parent, _arg, _ctx) => {
-	/* Implement Mutation.createOrder resolver logic here */
-};
-import type { MutationResolvers } from "./../../../types.generated";
-import { PrismaClient } from "@prisma/client";
-
-export const createProduct: NonNullable<
-	MutationResolvers["createProduct"]
-> = async (_parent, { input }, _ctx) => {
-	try {
-		const data = {
-			name: input.name,
-			slug: input.name,
-			price: input.price,
-			description: input.description,
-		};
-
-		const prisma = new PrismaClient();
-
-		const createdProduct = await prisma.product.create({
-			data,
-		});
-		return createdProduct;
-	} catch (error) {
-		// Obsługa błędów, jeśli wystąpią
-		console.error("Failed to create product:", error);
-		throw new Error("Failed to create product");
-	}
+> = async (_parent: any, _arg: { input: any }, _ctx: any) => {
+	return _ctx.prisma.order.create({
+		data: {
+			..._arg.input,
+		},
+	});
 };

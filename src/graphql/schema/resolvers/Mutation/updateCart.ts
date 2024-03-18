@@ -1,8 +1,11 @@
 import type { MutationResolvers } from "./../../../types.generated";
 export const updateCart: NonNullable<MutationResolvers["updateCart"]> = async (
-	_parent,
-	_arg,
-	_ctx,
+	_parent: any,
+	_arg: any,
+	_ctx: any,
 ) => {
-	/* Implement Mutation.updateCart resolver logic here */
+	return _ctx.prisma.cart.update({
+		where: { id: _arg.id },
+		data: { quantity: _arg.quantity },
+	});
 };
