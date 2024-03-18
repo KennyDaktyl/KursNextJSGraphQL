@@ -8,8 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "seed": "tsx prisma/seed.ts",
     "migrate": "tsx prisma/migrate.ts",
-    "build": "tsc -p . --outDir ./public",
-    "start": "node ./public/server.js"
+    "build": "tsc -p . --outDir ./dist",
+    "start": "tsx ./dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +32,6 @@
     "graphql-scalars": "^1.22.5",
     "slugify": "^1.6.6"
   },
-  "type": "module",
+  "type": "commonjs",
   "description": ""
 }
