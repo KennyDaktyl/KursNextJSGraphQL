@@ -3,12 +3,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCart = void 0;
 const createCart = async (_parent, _arg, _ctx) => {
     try {
-        const cart = await _ctx.prisma.cart.create({
+        // Najpierw tworzymy pusty koszyk
+        const cartCreated = await _ctx.prisma.cart.create({
             data: {
-                items: _arg.input.items,
+                items: {} // Pusty koszyk
+            },
+            include: {
+                items: true
+            }
+        });
+        console.log("cartCreated", cartCreated);
+        await _ctx.prisma.cartItem.create({
+            data: {
+                productId: _arg.input.item.productId,
+                quantity: _arg.input.item.quantity,
+                cartId: cartCreated.id
             },
         });
-        return cart;
+        const cartItem = await _ctx.prisma.cartItem.create({
+            data: {
+                quantity: _arg.input.item.quantity,
+                productId: _arg.input.item.productId,
+                cartId: cartCreated.id
+            }
+        });
+        console.log("cartItem", cartItem);
+        return cartCreated;
     }
     catch (error) {
         console.error("Failed to create cart:", error);

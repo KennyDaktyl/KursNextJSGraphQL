@@ -16,7 +16,6 @@ const collections = async (_parent, _arg, _ctx) => {
         });
         console.log("All collections:", allCollections);
         await prisma.$disconnect();
-        // Mapowanie rezultatów, aby zwrócić pustą listę, jeśli nie ma produktów w kategorii
         const collectionsWithProducts = allCollections.map((collection) => (Object.assign(Object.assign({}, collection), { products: collection.products.length > 0
                 ? collection.products.map((p) => p.product)
                 : [] })));

@@ -22,7 +22,6 @@ export const collections: NonNullable<QueryResolvers["collections"]> = async (
 		console.log("All collections:", allCollections);
 		await prisma.$disconnect();
 
-		// Mapowanie rezultatów, aby zwrócić pustą listę, jeśli nie ma produktów w kategorii
 		const collectionsWithProducts = allCollections.map((collection) => ({
 			...collection,
 			products:
