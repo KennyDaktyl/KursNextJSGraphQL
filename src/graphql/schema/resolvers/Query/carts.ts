@@ -7,7 +7,15 @@ export const carts: NonNullable<QueryResolvers["carts"]> = async (
 ) => {
 	const prisma = new PrismaClient();
 
-	const cartsGet = await prisma.cart.findMany();
+	const cartsGet = await prisma.cart.findMany({
+		include: {
+			items: {
+				include: {
+					product: true
+				}
+			}
+		}
+	});
 
 	return cartsGet;
 };

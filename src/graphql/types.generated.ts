@@ -45,7 +45,7 @@ export type Cart = {
 };
 
 export type CartInput = {
-	items?: InputMaybe<Array<InputMaybe<CartItemInput>>>;
+	item: CartItemInput;
 };
 
 export type CartItem = {
@@ -57,7 +57,7 @@ export type CartItem = {
 };
 
 export type CartItemInput = {
-	cartId: Scalars["String"]["input"];
+	cartId?: InputMaybe<Scalars["String"]["input"]>;
 	productId: Scalars["String"]["input"];
 	quantity: Scalars["Int"]["input"];
 };
