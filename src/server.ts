@@ -14,18 +14,19 @@ const prisma = new PrismaClient({
   log: ['query', 'info', 'warn'],
 });
 
-(async () => {
+
+const startServer = async () => {
   const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
     context: async () => { 
       prisma
       return {
         prisma,
       }
     },
-    listen: { port: 4000 },
   });
 
   console.log(`🚀  Server ready at: ${url}`);
-})();
+};
 
-export default server;
+startServer();

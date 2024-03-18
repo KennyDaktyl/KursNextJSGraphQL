@@ -12,17 +12,17 @@ const server = new server_1.ApolloServer({
 const prisma = new client_1.PrismaClient({
     log: ['query', 'info', 'warn'],
 });
-(async () => {
+const startServer = async () => {
     const { url } = await (0, standalone_1.startStandaloneServer)(server, {
+        listen: { port: 4000 },
         context: async () => {
             prisma;
             return {
                 prisma,
             };
         },
-        listen: { port: 4000 },
     });
     console.log(`🚀  Server ready at: ${url}`);
-})();
-exports.default = server;
+};
+startServer();
 //# sourceMappingURL=server.js.map
