@@ -21,7 +21,7 @@
 
 {
 	"compilerOptions": {
-	  "outDir": "./dist",
+	  "outDir": "./public",
 	  "strict": true,
 	  "sourceMap": true,
 	  "target": "es2017",

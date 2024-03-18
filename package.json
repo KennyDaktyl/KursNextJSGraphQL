@@ -8,8 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "seed": "tsx prisma/seed.ts",
     "migrate": "tsx prisma/migrate.ts",
-    "build": "tsc -p . --outDir ./dist",
-    "start": "tsx ./dist/server.js"
+    "build": "tsc -p . --outDir ./public",
+    "start": "tsx ./public/server.js"
   },
   "keywords": [],
   "author": "",
